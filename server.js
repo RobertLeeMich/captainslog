@@ -25,6 +25,11 @@ mongoose.connection.once('open', () => {
 });
 
 //Index
+app.get('/logs', async (req, res) => {
+  const logs = await Log.find({});
+  res.render('Index', { logs });
+});
+
 
 //New
 app.get('/logs/new', (req, res) => {
@@ -37,13 +42,19 @@ app.get('/logs/new', (req, res) => {
 
 //Create
 app.post('/logs', async (req, res) => {
+  req.body.shipIsBroken = req.body.shipIsBroken === 'on';
   const newLog = await Log.create(req.body);
   res.redirect(`/logs/${newLog._id}`);
 });
 
+
 //Edit
 
 //Show
+app.get('/logs/:id', async (req, res) => {
+  const log = await Log.findById(req.params.id);
+  res.render('Show', { log });
+});
 
 // Listen on port 3000
 app.listen(3000, () => {

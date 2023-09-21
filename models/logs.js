@@ -7,7 +7,9 @@ const logSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   }
-}, { timestamps: true });
+}, { 
+    timestamps: true 
+});
 
 const Log = mongoose.model('Log', logSchema);
 
