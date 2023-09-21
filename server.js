@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const jsxViewEngine = require('jsx-view-engine');
 const app = express();
 const Log = require('./models/logs')
+const methodOverride = require('method-override');
+
 
 // View engine
 app.engine('jsx', jsxViewEngine());
@@ -24,6 +26,8 @@ mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+app.use(methodOverride('_method'));
+
 //Index
 app.get('/logs', async (req, res) => {
   const logs = await Log.find({});
@@ -37,6 +41,10 @@ app.get('/logs/new', (req, res) => {
 });
 
 //Delete
+app.delete('/logs/:id', async (req, res) => {
+  await Log.findByIdAndRemove(req.params.id);
+  res.redirect('/logs');
+});
 
 //Update
 
