@@ -10,6 +10,7 @@ const Index = ({ logs }) => (
           <a href={`/logs/${log._id}`}>{log.title}</a>
           <form action={`/logs/${log._id}?_method=DELETE`} method="post">
             <input type="submit" value="Delete"/>
+            <a href={`/logs/${log._id}/edit`}>Edit</a>
           </form>
         </li>
       ))}

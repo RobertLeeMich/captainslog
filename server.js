@@ -57,6 +57,10 @@ app.post('/logs', async (req, res) => {
 
 
 //Edit
+app.get('/logs/:id/edit', async (req, res) => {
+  const log = await Log.findById(req.params.id);
+  res.render('Edit', { log });
+});
 
 //Show
 app.get('/logs/:id', async (req, res) => {
