@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const jsxViewEngine = require('jsx-view-engine');
 const app = express();
+const Log = require('./models/logs')
 
 // View engine
 app.engine('jsx', jsxViewEngine());
@@ -23,10 +24,26 @@ mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+//Index
+
 //New
 app.get('/logs/new', (req, res) => {
   res.render('New');
 });
+
+//Delete
+
+//Update
+
+//Create
+app.post('/logs', async (req, res) => {
+  const newLog = await Log.create(req.body);
+  res.redirect(`/logs/${newLog._id}`);
+});
+
+//Edit
+
+//Show
 
 // Listen on port 3000
 app.listen(3000, () => {
