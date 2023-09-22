@@ -47,6 +47,10 @@ app.delete('/logs/:id', async (req, res) => {
 });
 
 //Update
+app.put('/logs/:id', async (req, res) => {
+  const updatedLog = await Log.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.redirect(`/logs/${updatedLog._id}`);
+});
 
 //Create
 app.post('/logs', async (req, res) => {
@@ -62,11 +66,15 @@ app.get('/logs/:id/edit', async (req, res) => {
   res.render('Edit', { log });
 });
 
+
+
 //Show
 app.get('/logs/:id', async (req, res) => {
   const log = await Log.findById(req.params.id);
   res.render('Show', { log });
 });
+
+
 
 // Listen on port 3000
 app.listen(3000, () => {
