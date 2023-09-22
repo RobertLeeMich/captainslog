@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require('react')
 
 const New = () => (
   <form action="/logs" method="POST">
@@ -9,4 +9,4 @@ const New = () => (
   </form>
 );
 
-module.exports = New;
+module.exports = New

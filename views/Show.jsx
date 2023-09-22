@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require('react')
 
 const Show = ({ log }) => (
   <div>
@@ -10,4 +10,4 @@ const Show = ({ log }) => (
   </div>
 );
 
-module.exports = Show;
+module.exports = Show

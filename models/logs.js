@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const logSchema = new mongoose.Schema({
   title: String,
@@ -11,6 +11,6 @@ const logSchema = new mongoose.Schema({
     timestamps: true 
 });
 
-const Log = mongoose.model('Log', logSchema);
+const Log = mongoose.model('Log', logSchema)
 
-module.exports = Log;
+module.exports = Log

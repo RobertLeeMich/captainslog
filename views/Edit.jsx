@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require('react')
 
 const Edit = ({ log }) => (
   <div>
@@ -15,4 +15,4 @@ const Edit = ({ log }) => (
   </div>
 );
 
-module.exports = Edit;
+module.exports = Edit

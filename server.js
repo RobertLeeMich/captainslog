@@ -5,6 +5,8 @@ const jsxViewEngine = require('jsx-view-engine');
 const app = express();
 const Log = require('./models/logs')
 const methodOverride = require('method-override');
+const logsController = require('./controllers/logs');
+
 
 
 // View engine
@@ -23,60 +25,14 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 mongoose.connection.once('open', () => {
-  console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB')
 });
 
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method'))
 
-//Index
-app.get('/logs', async (req, res) => {
-  const logs = await Log.find({});
-  res.render('Index', { logs });
-});
-
-
-//New
-app.get('/logs/new', (req, res) => {
-  res.render('New');
-});
-
-//Delete
-app.delete('/logs/:id', async (req, res) => {
-  await Log.findByIdAndRemove(req.params.id);
-  res.redirect('/logs');
-});
-
-//Update
-app.put('/logs/:id', async (req, res) => {
-  const updatedLog = await Log.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.redirect(`/logs/${updatedLog._id}`);
-});
-
-//Create
-app.post('/logs', async (req, res) => {
-  req.body.shipIsBroken = req.body.shipIsBroken === 'on';
-  const newLog = await Log.create(req.body);
-  res.redirect(`/logs/${newLog._id}`);
-});
-
-
-//Edit
-app.get('/logs/:id/edit', async (req, res) => {
-  const log = await Log.findById(req.params.id);
-  res.render('Edit', { log });
-});
-
-
-
-//Show
-app.get('/logs/:id', async (req, res) => {
-  const log = await Log.findById(req.params.id);
-  res.render('Show', { log });
-});
-
-
+app.use('/logs', logsController)
 
 // Listen on port 3000
 app.listen(3000, () => {
-  console.log('Listening on port 3000');
+  console.log('Listening on port 3000')
 });
