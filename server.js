@@ -30,6 +30,7 @@ mongoose.connection.once('open', () => {
 
 app.use(methodOverride('_method'))
 
+//Refactoring Code to use controllers/logs.js
 app.use('/logs', logsController)
 
 // Listen on port 3000
